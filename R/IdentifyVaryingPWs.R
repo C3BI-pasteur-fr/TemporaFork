@@ -45,7 +45,7 @@ IdentifyVaryingPWs <- function(object, pval_threshold=0.05){
       p_vals[[i]] <- 1
       gams[[i]] <- NA
       next
-      }
+    }
     if (length(grep(themes[i], rownames(gsva_bycluster))) > 1){
       plot_df <- data.frame(cluster=colnames(gsva_bycluster[grep(themes[i], rownames(gsva_bycluster)), ]), value=colMeans(gsva_bycluster[grep(themes[i], rownames(gsva_bycluster)), ], na.rm=T))
     } else if (length(grep(themes[i], rownames(gsva_bycluster))) == 1){
@@ -67,7 +67,7 @@ IdentifyVaryingPWs <- function(object, pval_threshold=0.05){
     cat("No temporally varying pathways detected. Please try running IdentifyVaryingPWs with a more relaxed p-value cutoff.")
     #eventhough the function was not successful return the object because in the vignette
     # this function call sets the original object to what is returned and if it is null
-    # you loose all the processing you have done until now. 
+    # you loose all the processing you have done until now.
     return(object)
   } else {
     object@varying.pws <- varying_pathways

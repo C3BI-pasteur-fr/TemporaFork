@@ -14,6 +14,7 @@
 #' @importFrom stats p.adjust prcomp screeplot
 #' @importFrom scales rescale
 #' @importFrom reshape2 dcast
+#' @importFrom magrittr '%>%'
 #'
 #'
 PlotTrajectory <- function(object, layout=NULL, ...){
@@ -42,8 +43,8 @@ PlotTrajectory <- function(object, layout=NULL, ...){
     # the 100 most probably is related to hgap
     l$layout[layerOrder,1] = l$layout[,2]  %>%
       round()  %>%
-      table %>%
-      lapply( FUN = function(x){(0:spacers)[1:x] + (spacers - x + 1)/2}) * 100 %>%
+      table() %>%
+      lapply( FUN = function(x){((0:spacers)[1:x] + (spacers - x + 1)/2) * 100 }) %>%
       unlist
 
 
@@ -79,7 +80,7 @@ PlotTrajectory <- function(object, layout=NULL, ...){
                   vertex.pie.color=list(colours),
                   pie.border=list(rep("white", length(levels(object@meta.data$Timepoints)))),
                   vertex.frame.color="white",
-                  vertex.label.family="Arial",
+                  # vertex.label.family="Arial",
                   vertex.label.color="black",
                   edge.lty = E(edge_graph)$type,
                   ...)

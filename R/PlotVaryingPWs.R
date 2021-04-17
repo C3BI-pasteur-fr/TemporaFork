@@ -26,6 +26,7 @@ gams <- object@gams
 cat("\nPlotting time-dependent pathways...")
 
 for (i in order(varying_pathways)){
+  cat(file=stderr(), paste("i: ", i, "pval:",  round(varying_pathways[[i]], 5), "\n"))
   if (length(grep(names(varying_pathways)[i], rownames(gsva_bycluster))) > 1){
     plot_df <- data.frame(cluster=colnames(gsva_bycluster[grep(names(varying_pathways)[i], rownames(gsva_bycluster)), ]), value=colMeans(gsva_bycluster[grep(names(varying_pathways)[i], rownames(gsva_bycluster)), ]))
     plot_df$time <- object@cluster.metadata$Cluster_time_score
