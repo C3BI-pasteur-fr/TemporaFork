@@ -4,7 +4,7 @@
 \alias{BuildTrajectory}
 \title{Build mutual information-based network}
 \usage{
-BuildTrajectory(object, n_pcs, difference_threshold = 0.01)
+BuildTrajectory(object, n_pcs, difference_threshold = 0.01, loadings = 0.4)
 }
 \arguments{
 \item{object}{A Tempora object containing a gene expression matrix and metadata}
@@ -12,12 +12,15 @@ BuildTrajectory(object, n_pcs, difference_threshold = 0.01)
 \item{n_pcs}{Number of principal components to be used in building the network.}
 
 \item{difference_threshold}{Percent of permissible difference between the temporal scores of two clusters to determine the direction of their connections. The temporal scores are calculated based on based on the clusters' composition of cells from each timepoint. The directions of edges connecting pairs of clusters will only be determined for cluster pairs with difference in their time scores higher than the threshold. Other edges will remain undirected. Default at 0.01}
+
+\item{loadings}{Threshold of PCA loadings for pathways to be used in trajectory construction. The higher the loading, the more the pathway contributes to a principal component. Default at 0.4.}
 }
+
 \description{
 Build the information-based cluster-cluster network using reduced-dimensionality pathway enrichment profiles of all clusters.
 This network connects related cell types and states across multiple time points. Taking advantage of the available time information, Tempora also infers the directions of all connections in a trajectory that go from early to late clusters.
 }
 \examples{
-\dontrun{tempora_data <- BuildTrajectory(tempora_data, n_pcs=10, difference_threshold=0.01)}
+\dontrun{tempora_data <- BuildTrajectory(tempora_data, n_pcs=10, difference_threshold=0.01, loadings=0.4)}
 BuildTrajectory
 }
