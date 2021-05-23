@@ -26,7 +26,7 @@ CalculatePWProfiles <- function(object, gmt_path, method="gsva", min.sz=5, max.s
   exprMatrix_bycluster <- list()
   pathwaygmt <- GSEABase::getGmt(gmt_path)
   for (i in sort(unique(object@meta.data$Clusters))){
-    exprMatrix_bycluster[[i]] <- rowMeans(exprMatrix[, which(colnames(exprMatrix) %in% rownames(object@meta.data)[which(object@meta.data$Clusters == i)])])
+    exprMatrix_bycluster[[i]] <- rowMeans(exprMatrix[, which(colnames(exprMatrix) %in% rownames(object@meta.data)[which(object@meta.data$Clusters == i)]), drop=F])
   }
   names(exprMatrix_bycluster) <- sort(unique(object@meta.data$Clusters))
 
